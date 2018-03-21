@@ -3,6 +3,10 @@ body {
     font-size: 95%;
 }
 
+img {
+    max-width: 100%;
+}
+
 #warper {
     margin: 20px auto;
     max-width: 1200px;

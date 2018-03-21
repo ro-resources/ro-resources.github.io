@@ -21,7 +21,7 @@ function addId(type) {
 
 function idnum2itemdesctable(file) {
     var reader = new FileReader();
-    reader.readAsText(file, "UTF-8");
+    reader.readAsText(file, "ISO-8859-1");
     reader.onload = function (evt) {
         let items = evt.target.result.split('\n#');
         let regexId = /(\d{1,})[\#]/;
@@ -62,7 +62,7 @@ function idnum2itemdesctable(file) {
 function iteminfo(file) {
 
     var reader = new FileReader();
-    reader.readAsText(file, "UTF-8");
+    reader.readAsText(file, "ISO-8859-1");
     reader.onload = function (evt) {
         let itemInfoData = evt.target.result.split('\n');
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vietlubu's Ragnarok Online Resource</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="shortcut icon" type="image/png" href="/favicon.gif"/>
+</head>
+<body class="home">
+	<div class="" id="wrapper">
+	    <div class="" id="container">
+            <div class="" id="animation">
+                <!-- <img class="mavka img-animation draggagle-img" draggable="false" src="assets/data/ani-monsters/mavka.gif" alt="mavka"> -->
+            </div>
+
+            <div class="" id="app">
+                <div class="ro-titlebar">
+                    <div class="ro-btn ro-win-btn"></div>
+                    <p class="ro-win-title"></p>
+                </div>
+
+                <div class="ro-win-content">
+
+                </div>
+            </div>
+	    </div>
+	</div>
+
+    <script type="text/javascript" src="/js/showdown.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+
+    <script>
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let converter = new showdown.Converter();
+                let html = converter.makeHtml(this.responseText);
+
+                document.querySelector('.ro-win-content').innerHTML = html;
+            }
+        };
+        xhttp.open("GET", "markdown/home.md", true);
+        xhttp.send();
+
+    </script>
+</body>
+</html>

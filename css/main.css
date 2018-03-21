@@ -1,3 +1,8 @@
+body {
+    font-family: system-ui, sans-serif;
+    font-size: 95%;
+}
+
 #warper {
     margin: 20px auto;
     max-width: 1200px;
@@ -45,4 +50,64 @@
 
 .hidden {
     display: none;
+}
+
+.ro-titlebar {
+    background-image: url("../img/interface/titlebar_mid.png");
+    background-repeat: repeat-x;
+    border-top: 1px solid rgb(132, 148, 206);
+    border-bottom: 1px solid #777777;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    text-shadow: 1px 1px #fff;
+    padding-left: 5px;
+    font-size: 0;
+    height: 15px;
+    line-height: 16px;
+    position: relative;
+}
+
+.ro-win-btn {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background-image: url("../img/interface/sys_base_off.png");
+    background-repeat: no-repeat;
+    margin: 1px 5px 1px 0px;
+}
+
+.ro-btn.ro-win-btn:hover {
+    background-image: url("../img/interface/sys_base_on.png");
+}
+
+#container {
+    margin: 50px auto;
+    max-width: 900px;
+}
+
+.ro-titlebar p {
+    display: inline-block;
+    padding-right: 5px;
+    margin: 0;
+    font-size: 10pt;
+}
+
+.ro-win-content h1 {
+    text-align: center;
+    color: #3991ab;
+}
+
+.ro-win-content {
+    border: 1px solid #d2d2d2;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.ro-win-content .content {
+    padding: 20px;
+}
+
+.ro-win-content ol p {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

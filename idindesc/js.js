@@ -23,7 +23,9 @@ function idnum2itemdesctable(file) {
     var reader = new FileReader();
     reader.readAsText(file, "ISO-8859-1");
     reader.onload = function (evt) {
-        let items = evt.target.result.split('\n#');
+        let items = evt.target.result.replace(/\r\n/g, '\n');    // Convert CRLF to LF
+        items = itemInfoData.split('\n#');
+        
         let regexId = /(\d{1,})[\#]/;
         let itemId = 0;
         let idnum2itemdesctable = '';
@@ -64,13 +66,16 @@ function iteminfo(file) {
     var reader = new FileReader();
     reader.readAsText(file, "ISO-8859-1");
     reader.onload = function (evt) {
-        let itemInfoData = evt.target.result.split('\n');
-
+        let itemInfoData = evt.target.result.replace(/\r\n/g, '\n');    // Convert CRLF to LF
+        itemInfoData = itemInfoData.split('\n');
+        
         let regexID = /\s([\[])(\d{1,})([\]]) = {/;
         let regexDesc = /\sidentifiedDescriptionName = {$/;
         let regexEndBlock = /\s},/;
         let iteminfo = '';
-
+                
+        console.log(itemInfoData[7]);
+        console.log(itemInfoData[7].match(regexDesc));
         for (let index = 0; index < itemInfoData.length; index++) {
             matchItemID = itemInfoData[index].match(regexID);
             if (matchItemID) {
@@ -78,6 +83,7 @@ function iteminfo(file) {
             }
 
             idDescTitle = itemInfoData[index].match(regexDesc);
+            
             if (idDescTitle) {
                 indexDesc = index+1;
                 let itemDesc = [];
@@ -94,6 +100,7 @@ function iteminfo(file) {
 
                     itemDesc.push(itemInfoData[indexDesc]);
                 }
+                
                 iteminfo = iteminfo + itemDesc.join('\n') + '\n';
 
                 index = indexDesc;

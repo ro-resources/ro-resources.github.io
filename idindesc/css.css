@@ -1,0 +1,32 @@
+.idindesc {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.idindesc .itemdesc {
+    display: inline-block;
+    min-width: 45%;
+    height: 100px;
+}
+
+.idindesc .itemdesc * {
+    display: block;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.idindesc .idnum2itemdesctable * {
+    display: block;
+    margin-bottom: 15px;
+    float: right;
+    clear: both;
+}
+
+input {
+    max-width: 160px;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+}

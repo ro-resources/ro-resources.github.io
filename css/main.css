@@ -1,3 +1,13 @@
+#warper {
+    margin: 20px auto;
+    max-width: 1200px;
+    min-width: 600px;
+}
+
+#warper .title {
+    text-align: center;
+}
+
 #loadding {
     position: fixed;
     width: 100%;

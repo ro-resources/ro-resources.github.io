@@ -14,7 +14,30 @@
         <div class="loader"></div>
     </div>
     <div id="warper">
-        
+        <div class="title">
+            <h1>Add ID to item Description</h1>
+            <code>Make by Vietlubu - v1.0</code>
+        </div>
+        <div class="content idindesc">
+            <table>
+                <tr>
+                    <td>
+                        <div class="itemdesc iteminfo">
+                            <code>iteminfo.lua</code>
+                            <input type="file" name="iteminfo" id="iteminfo">
+                            <button onclick="addId('iteminfo')">Add Id to iteminfo.lua</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="itemdesc idnum2itemdesctable">
+                            <code>idnum2itemdesctable.txt</code>
+                            <input type="file" name="idnum2itemdesctable" id="idnum2itemdesctable">
+                            <button onclick="addId('idnum2itemdesctable')">Add Id to idnum2itemdesctable.txt</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <script src="/js/jquery-3.3.1.min.js"></script>

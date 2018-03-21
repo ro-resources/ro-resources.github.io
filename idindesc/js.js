@@ -5,7 +5,13 @@ function addId(type) {
         return;
     }
 
+    document.getElementById("download").innerHTML = '';
+    button = document.createElement('button');
+    button.innerHTML = "Download";
+    document.getElementById("download").appendChild(button);
+
     if (type == "iteminfo") {
+        document.getElementById('loadding').classList.remove('hidden');
         iteminfo(file);
     }
 }
@@ -54,10 +60,17 @@ function iteminfo(file) {
 
         }
 
-        console.log(iteminfo);
-        
-        
+        // iteminfo
+        document.querySelector('.output .filename').innerHTML = 'iteminfo.lua';
+        // document.querySelector('.output textarea').innerHTML = iteminfo;
 
+        document.getElementById('loadding').classList.add('hidden');
+        document.getElementById('output').classList.remove('hidden');
+
+        document.querySelector("#download button").addEventListener("click", function(event){
+            let blob = new Blob([iteminfo], {type: "text/plain"});
+            saveAs(blob, "iteminfo.lua");
+        }, false);
     }   
     
 }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Item checker - Vietlubu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/items-checker/css.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.gif"/>
+</head>
+<body>
+    <div id="loadding" class="hidden">
+        <div class="loader"></div>
+    </div>
+    <div id="warper">
+        <div class="title">
+            <h1>Items checker</h1>
+            <code>Make by Vietlubu - v1.0</code>
+        </div>
+        <form action="" class="frm-checker">
+            <div class="luafile">
+                <div><code>iteminfo.lua</code></div>
+                <input type="file" name="iteminfo" id="iteminfo">
+            </div>
+            <div class="dbfile">
+                <div class="main_db">
+                    <div><code>item_db.txt</code></div>                    
+                    <input type="file" name="item_db" id="item_db">
+                </div>
+                <div class="extend_db">
+                    <div><code>item_db2(extend-db)</code></div>                    
+                    <input type="file" name="item_db2" id="item_db2">
+                </div>
+            </div>
+            <div class="checker">
+                <button type="button" id="btn-checker" onclick="runCheck()">Check</button>
+            </div>
+        </form>
+
+        <div class="checker-content">
+            <code class="title">item_db.txt</code>
+            <div class="message"><code>iteminfo.lua</code> Missing <span class="count-missing">0</span> items</div>
+            <div class="content">
+                <code id="content_item_db">
+                    
+                </code>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/items-checker/js.js"></script>
+</body>
+</html>

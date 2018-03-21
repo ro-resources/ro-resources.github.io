@@ -1,0 +1,93 @@
+#warper {
+    margin: 20px auto;
+    max-width: 1200px;
+    min-width: 800px;
+}
+
+.title, .checker-content {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    text-align: center;
+}
+
+.luafile, .dbfile {
+    display: inline-block;
+    text-align: left;
+}
+
+.main_db, .extend_db {
+    display: inline-block;    
+}
+
+.luafile {
+
+}
+
+.dbfile {
+
+}
+
+.checker {
+    margin: 20px auto;
+}
+
+#btn-checker {
+    
+}
+
+.checker-content {
+    text-align: left;
+}
+
+.checker-content .title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.checker-content .content {
+    overflow: auto;
+    max-height: 500px;
+    padding: 10px;
+    border: 1px solid #b5b5b5;
+}
+
+.checker-content .content code span {
+    white-space: nowrap;
+    display: block;
+    padding: 1px;
+}
+
+.checker-content .content .line {
+    width: 50px;
+    display: inline-block;
+    background: #bbb;
+    margin-right: 5px;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.checker-content #content_item_db {
+    text-align: left;
+}
+
+.error {
+    color: #cd5c5c;
+}
+
+.error .line {
+    color: #f8f8ff;
+    background: #cd5c5c !important;
+}
+
+.fine {
+    display: none !important;
+}

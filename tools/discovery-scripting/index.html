@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+      .command {
+        padding: 7px;
+        margin: 7px;
+      }
+      .github-ref img {
+        width: 16px;
+      }
+      .name pre {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 0;
+        margin-top: 10px;
+      }
+      .description {
+
+      }
+      #selectSearchType {
+        width: 150px;
+        flex: none;
+      }
+    </style>
+
+    <title>Discovery Scripting</title>
+  </head>
+  <body>
+    <div class="container justify-content-center">
+      <h4>Discovery Scripting</h4>
+      <p>It simple tool used to search eAthena/Hercules script commands</p>
+      <p>Source script commands: <a href="https://github.com/HerculesWS/Hercules/blob/stable/doc/script_commands.txt" target="_blank">https://github.com/HerculesWS/Hercules/blob/stable/doc/script_commands.txt</a></p>
+      <p>Discuss topic: </p>
+      <p><a href="script_commands.json" target="_blank">Download json data</a></p>
+
+      <form action="" id="frm_search">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="btn btn-outline-secondary" type="submit" disabled="">Enter</button>
+            </div>
+            <select class="custom-select" id="selectSearchType">
+              <option selected value="similar">Similar Search</option>
+              <option value="exactly">Exactly Search</option>
+            </select>
+
+            <input id="text_search" name="search-script" type="text" class="form-control" placeholder="Search similar text" autocomplete="off" maxlength="32" disabled="">
+        </div>
+      </form>
+
+      <hr>
+      <p>Showing: <spam class="total-command">0</spam> commands</p>
+
+      <div id="commands"></div>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.4.5/fuse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+      function htmlEntities(str) {
+          return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function renderListCommand(data) {
+        $(".total-command").text(data.length);
+        $("#commands").html('');
+        $.each(data, function(k, command) {
+          $("#commands").append(renderCommand(command));
+        });
+
+        $("#frm_search").find("button, input, select").removeAttr("disabled");
+        $("#frm_search").find("#text_search").focus();
+      }
+
+      function renderCommand(command) {
+        let html_command = '';
+        html_command += '<div class="command card">';
+        html_command += '<div class="name">';
+        html_command += '<pre>' + htmlEntities(command.command) + ' <a href="https://github.com/HerculesWS/Hercules/blob/stable/doc/script_commands.txt#L' + command.line + '" target="_blank" class="github-ref"><img src="' + window.location.pathname + '/GitHub-Mark-32px.png" alt=""></a></pre>'
+        html_command += '</div>';
+        html_command += '<hr>';
+        html_command += '<pre class="description">' + htmlEntities(command.description) + '</pre>';
+        html_command += '</div>';
+
+        return html_command;
+      }
+
+      $.getJSON(window.location.pathname + "/script_commands.json", function(command_data) {
+        // Render all commands
+        renderListCommand(command_data);
+
+        // Create fuse options
+        var options = {
+          shouldSort: true,
+          tokenize: true,
+          matchAllTokens: true,
+          threshold: 0.6,
+          location: 0,
+          distance: 20,
+          maxPatternLength: 32,
+          minMatchCharLength: 1,
+          keys: [
+            "command",
+            "description"
+          ]
+        };
+
+        // Set fuse options
+        var fuse = new Fuse(command_data, options);
+
+        $("#selectSearchType").on("change", function () {
+          if ($(this).val() == "exactly") {
+            $("#text_search").attr("placeholder", "Search exactly text");
+            options.threshold = 0;
+            fuse = new Fuse(command_data, options);
+          } else {
+            $("#text_search").attr("placeholder", "Search similar text");
+            options.threshold = 0.6;
+            fuse = new Fuse(command_data, options);
+          }
+          $("#frm_search").find("#text_search").focus();
+        });
+
+        $('#dropdown-search-type').on('show.bs.dropdown', function () {
+          console.log('a');
+        })
+
+
+
+        $("#frm_search").on("submit", function (event) {
+          event.preventDefault();
+          $(this).find("button, input, select").attr('disabled','disabled');
+          if ($(this).find("#text_search").val().length > 1) {
+            result = fuse.search($(this).find("#text_search").val());
+            renderListCommand(result);
+          } else if ($(this).find("#text_search").val().length == 0) {
+            renderListCommand(command_data);
+          }
+        });
+
+      });
+    </script>
+  </body>
+</html>
